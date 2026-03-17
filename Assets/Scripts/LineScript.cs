@@ -12,6 +12,8 @@ public class LineScript : MonoBehaviour
 
     [SerializeField]private Material noSee;
     [SerializeField]private Material seen;
+
+    [SerializeField] private float distanceForAttack;
     private void Start()
     {
         player = GameObject.Find("Player");
@@ -32,9 +34,14 @@ public class LineScript : MonoBehaviour
         }
     }
 
-    public bool IsRange (Transform self, Transform traget) 
+    public bool IsRange (Transform self, Transform target) 
     { 
-        return Vector3.Distance(self.position, traget.position) < distance;
+        return Vector3.Distance(self.position, target.position) < distance;
+    }
+
+    public bool IsRangeAttack (Transform self, Transform target) 
+    {
+        return Vector3.Distance(self.position, target.position) < distanceForAttack;
     }
 
     public bool IsAngle (Transform self, Transform target) 

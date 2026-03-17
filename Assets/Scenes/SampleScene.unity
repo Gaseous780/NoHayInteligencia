@@ -977,6 +977,7 @@ MonoBehaviour:
     m_Bits: 8
   noSee: {fileID: 2100000, guid: 60a4e9a1f3ddfd94c90dcb2a4feb45ac, type: 2}
   seen: {fileID: 2100000, guid: b49412ab5415ac644ae12247c9564e46, type: 2}
+  distanceForAttack: 1
 --- !u!114 &1969680491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1013,8 +1014,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd57c9b61a98ff4dbad4e5ad2b15994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyModel
-  speed: 33
+  speed: 5
   rotationSpeed: 11
+  attackMaterial: {fileID: 2100000, guid: 60a4e9a1f3ddfd94c90dcb2a4feb45ac, type: 2}
 --- !u!54 &1969680494
 Rigidbody:
   m_ObjectHideFlags: 0

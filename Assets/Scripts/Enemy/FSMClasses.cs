@@ -6,6 +6,7 @@ public class FSMClasses : MonoBehaviour
 
     private PatrolState patrolState;
     private PursuitState pursuitState;
+    private AttackState attackState;
 
     public State _currentState { get { return currentState; } set { currentState = value; } }
 
@@ -13,6 +14,7 @@ public class FSMClasses : MonoBehaviour
     {
         patrolState = new PatrolState(this);
         pursuitState = new PursuitState(this);
+        attackState = new AttackState(this);
 
         currentState = patrolState;
     }
@@ -25,6 +27,11 @@ public class FSMClasses : MonoBehaviour
     public void ChangeToPursuit() 
     {
         ChangeState(pursuitState);
+    }
+
+    public void ChangeToAttack()
+    {
+        ChangeState(attackState);
     }
 
     public void ChangeState (State newState) 
@@ -86,6 +93,21 @@ public class PursuitState : State
         if (canSeePlayer != true)
         {
             fsm.ChangeToPatrol();
+        }
+    }
+}
+
+public class AttackState : State
+{
+    public AttackState (FSMClasses fsm) : base(fsm) { }
+
+    public override void Enter() { }
+    public override void Exit() { }
+    public override void Update(bool canSeePlayer)
+    {
+        if (canSeePlayer != true)
+        {
+            fsm.ChangeToPursuit();
         }
     }
 }

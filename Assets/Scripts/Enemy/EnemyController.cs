@@ -27,6 +27,16 @@ public class EnemyController : MonoBehaviour
             los.IsObstacle(transform, player.transform) == true)
         {
             fsm.ChangeToPursuit();
+
+            if (los.IsRangeAttack (transform, player.transform) == true)
+            {
+                fsm.ChangeToAttack();
+            }
+            else
+            {
+                model.EndAttack();
+                fsm.ChangeToPursuit();
+            }
         }
         else
         {
@@ -36,15 +46,19 @@ public class EnemyController : MonoBehaviour
         ExecuteState();
     }
 
-    public void ExecuteState() 
-    { 
-        if (fsm._currentState is PatrolState) 
+    public void ExecuteState()
+    {
+        if (fsm._currentState is PatrolState)
         {
             model.Patrol();
         }
-        else if (fsm._currentState is PursuitState) 
+        else if (fsm._currentState is PursuitState)
         {
             model.Pursuit();
+        }
+        else if (fsm._currentState is AttackState)
+        {
+            model.StartAttack();
         }
     }
 }

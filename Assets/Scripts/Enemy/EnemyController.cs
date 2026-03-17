@@ -22,26 +22,21 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (los.IsRange(transform, player.transform) == true &&
-            los.IsAngle(transform, player.transform) == true &&
-            los.IsObstacle(transform, player.transform) == true)
-        {
-            fsm.ChangeToPursuit();
 
-            if (los.IsRangeAttack (transform, player.transform) == true)
-            {
-                fsm.ChangeToAttack();
-            }
-            else
-            {
-                model.EndAttack();
-                fsm.ChangeToPursuit();
-            }
+        bool seenPlayer;
+
+        if (fsm._currentState is AttackState)
+        {
+            seenPlayer = los.IsRangeAttack(transform, player.transform);
         }
         else
         {
-            fsm.ChangeToPatrol();
+            seenPlayer = los.IsRange(transform, player.transform) == true &&
+                los.IsAngle(transform, player.transform) == true &&
+                los.IsObstacle(transform, player.transform) == true;
         }
+
+        fsm.UpdateState(seenPlayer);
 
         ExecuteState();
     }

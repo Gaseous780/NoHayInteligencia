@@ -15,7 +15,7 @@ public class EnemyDecisionTree : MonoBehaviour
 
 
         questionAttackNode = new QuestionNode(context => context.los.IsRangeAttack(context.self, context.player),
-        pursuitNode, attackNode);
+        attackNode, pursuitNode);
 
         rootNode = new QuestionNode(context => context.los.IsRange(context.self, context.player)
         && context.los.IsAngle(context.self, context.player) &&
@@ -27,10 +27,5 @@ public class EnemyDecisionTree : MonoBehaviour
     public void Evaluate(EnemyController enemy, EnemyContext context)
     {
         rootNode.Evaluate(enemy, context);
-    }
-
-    public void Evaluatee(EnemyController enemy, EnemyContext context)
-    {
-        questionAttackNode.Evaluate(enemy, context);
     }
 }

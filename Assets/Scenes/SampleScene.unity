@@ -978,7 +978,7 @@ MonoBehaviour:
     m_Bits: 8
   noSee: {fileID: 2100000, guid: 60a4e9a1f3ddfd94c90dcb2a4feb45ac, type: 2}
   seen: {fileID: 2100000, guid: b49412ab5415ac644ae12247c9564e46, type: 2}
-  distanceForAttack: 1
+  distanceForAttack: 10
 --- !u!114 &1969680491
 MonoBehaviour:
   m_ObjectHideFlags: 0

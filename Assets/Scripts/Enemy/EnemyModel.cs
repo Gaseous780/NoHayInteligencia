@@ -8,21 +8,21 @@ public class EnemyModel : MonoBehaviour
 
     private GameObject player;
 
-    [SerializeField] private Material attackMaterial;
-    private Material defaultMaterial;
+    //[SerializeField] private Material attackMaterial;
+    //private Material defaultMaterial;
 
-    private MeshRenderer renderer;
+    //private MeshRenderer renderer;
 
     private void Awake()
     {
-        defaultMaterial = GetComponent<MeshRenderer>().material;
+        //defaultMaterial = GetComponent<MeshRenderer>().material;
     }
 
     private void Start()
     {
         player = GameObject.Find("Player");
 
-        renderer = GetComponent<MeshRenderer>();
+        //renderer = GetComponent<MeshRenderer>();
     }
 
     public void Pursuit() 
@@ -41,20 +41,20 @@ public class EnemyModel : MonoBehaviour
         transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
     }
 
-    public void StartAttack()
-    {
-        renderer.material = attackMaterial;
-        Attack();
-    }
+    //public void StartAttack()
+    //{
+    //    renderer.material = attackMaterial;
+    //    Attack();
+    //}
 
-    public void Attack()
-    {
-        Debug.Log("Empieza a atacar");
-    }
+    //public void Attack()
+    //{
+    //    Debug.Log("Empieza a atacar");
+    //}
 
-    public void EndAttack()
-    {
-        Debug.Log("Deja de atacar");
-        renderer.material = defaultMaterial;
-    }
+    //public void EndAttack()
+    //{
+    //    Debug.Log("Deja de atacar");
+    //    renderer.material = defaultMaterial;
+    //}
 }

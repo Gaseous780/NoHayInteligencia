@@ -60,14 +60,14 @@ public class EnemyController : MonoBehaviour
     //}
 
     ///////
-    private Transform player;
+    [SerializeField] private Transform player;
     private LineOfSight los;
     private EnemyDecisionTree desicionTree;
     private EnemyContext context;
 
     [SerializeField] private float speed=3;
-    [SerializeField] private float rotationSpeed=3;
-    [SerializeField] private float patrolRotationSpeed = 3;
+    [SerializeField] private float rotationSpeed=33;
+    [SerializeField] private float patrolRotationSpeed = 33;
 
     [SerializeField] private Material attackMaterial;
     private Material defaultMaterial;
@@ -79,7 +79,18 @@ public class EnemyController : MonoBehaviour
         desicionTree=GetComponent<EnemyDecisionTree>();
         context=new EnemyContext { self = transform, player = player, los = los };
 
+        //renderer = GetComponent<MeshRenderer>();
+
     }
+
+    private void Start()
+    {
+        player = GameObject.Find("Player").transform;
+
+        renderer = GetComponent<MeshRenderer>();
+        defaultMaterial = GetComponent<MeshRenderer>().material;
+    }
+
     public void Update()
     {
         context.player = player;
@@ -99,6 +110,8 @@ public class EnemyController : MonoBehaviour
     public void Patrol()
     {
         transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+
+        renderer.material = defaultMaterial;
     }
 
     public void Attack()
@@ -106,7 +119,6 @@ public class EnemyController : MonoBehaviour
         Debug.Log("Empieza a atacar");
         renderer.material = attackMaterial;
         Debug.Log("Deja de atacar");
-        renderer.material = defaultMaterial;
     }
 
 

@@ -613,7 +613,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 60a4e9a1f3ddfd94c90dcb2a4feb45ac, type: 2}
+  - {fileID: 2100000, guid: 4d0927b0ce4826b48af693fe3aa78f99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1003,9 +1003,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9917a22446c325f4888d37dbfd655f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  player: {fileID: 1756837726}
   speed: 3
   rotationSpeed: 3
   patrolRotationSpeed: 3
+  attackMaterial: {fileID: 2100000, guid: 60a4e9a1f3ddfd94c90dcb2a4feb45ac, type: 2}
 --- !u!114 &1969680493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,7 +1022,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyModel
   speed: 5
   rotationSpeed: 11
-  attackMaterial: {fileID: 2100000, guid: 60a4e9a1f3ddfd94c90dcb2a4feb45ac, type: 2}
 --- !u!54 &1969680494
 Rigidbody:
   m_ObjectHideFlags: 0

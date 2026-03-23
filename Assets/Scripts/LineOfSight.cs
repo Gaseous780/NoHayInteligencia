@@ -20,19 +20,19 @@ public class LineOfSight : MonoBehaviour
         playerRenderer = player.GetComponent<MeshRenderer>();
     }
 
-    private void Update()
-    {
-        if (IsRange(transform, player.transform) == true && 
-            IsAngle (transform, player.transform) == true && 
-            IsObstacle (transform, player.transform) == true) 
-        {
-            playerRenderer.material = seen;
-        }
-        else 
-        {
-            playerRenderer.material = noSee;
-        }
-    }
+    //private void Update()
+    //{
+    //    if (IsRange(transform, player.transform) == true && 
+    //        IsAngle (transform, player.transform) == true && 
+    //        IsObstacle (transform, player.transform) == true) 
+    //    {
+    //        playerRenderer.material = seen;
+    //    }
+    //    else 
+    //    {
+    //        playerRenderer.material = noSee;
+    //    }
+    //}
 
     public bool IsRange (Transform self, Transform target) 
     { 

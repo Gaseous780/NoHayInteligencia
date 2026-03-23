@@ -1005,8 +1005,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   player: {fileID: 1756837726}
   speed: 3
-  rotationSpeed: 3
-  patrolRotationSpeed: 3
+  rotationSpeed: 33
+  patrolRotationSpeed: 33
   attackMaterial: {fileID: 2100000, guid: 60a4e9a1f3ddfd94c90dcb2a4feb45ac, type: 2}
 --- !u!114 &1969680493
 MonoBehaviour:

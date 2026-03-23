@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LineScript : MonoBehaviour
+public class LineOfSight : MonoBehaviour
 {
     [SerializeField] private int distance = 33;
     [SerializeField] private float angle = 90;

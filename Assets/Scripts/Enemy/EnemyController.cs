@@ -1,59 +1,103 @@
+using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyController : MonoBehaviour
 {
-    private FSMClasses fsm;
-    private LineScript los;
-    private EnemyModel model;
+    //private FSMClasses fsm;
+    //private LineScript los;
+    //public EnemyModel model;
 
-    private GameObject player;
+    //private GameObject player;
+
+    //private void Awake()
+    //{
+    //    fsm = GetComponent<FSMClasses>();
+    //    los = GetComponent<LineScript>();
+    //    model = GetComponent<EnemyModel>();
+    //}
+
+    //private void Start()
+    //{
+    //    player = GameObject.Find("Player");
+    //}
+
+    //private void Update()
+    //{
+
+    //    bool seenPlayer;
+
+    //    if (fsm._currentState is AttackState)
+    //    {
+    //        seenPlayer = los.IsRangeAttack(transform, player.transform);
+    //    }
+    //    else
+    //    {
+    //        seenPlayer = los.IsRange(transform, player.transform) == true &&
+    //            los.IsAngle(transform, player.transform) == true &&
+    //            los.IsObstacle(transform, player.transform) == true;
+    //    }
+
+    //    fsm.UpdateState(seenPlayer);
+
+    //    ExecuteState();
+    //}
+
+    //public void ExecuteState()
+    //{
+    //    if (fsm._currentState is PatrolState)
+    //    {
+    //        model.Patrol();
+    //    }
+    //    else if (fsm._currentState is PursuitState)
+    //    {
+    //        model.Pursuit();
+    //    }
+    //    else if (fsm._currentState is AttackState)
+    //    {
+    //        model.StartAttack();
+    //    }
+    //}
+
+    ///////
+    private Transform player;
+    private LineOfSight los;
+    private EnemyDecisionTree desicionTree;
+    private EnemyContext context;
+
+    [SerializeField] private float speed=3;
+    [SerializeField] private float rotationSpeed=3;
+    [SerializeField] private float patrolRotationSpeed = 3;
+
 
     private void Awake()
     {
-        fsm = GetComponent<FSMClasses>();
-        los = GetComponent<LineScript>();
-        model = GetComponent<EnemyModel>();
-    }
+        los = GetComponent<LineOfSight>();
+        desicionTree=GetComponent<EnemyDecisionTree>();
+        context=new EnemyContext { self = transform, player = player, los = los };
 
-    private void Start()
+    }
+    public void Update()
     {
-        player = GameObject.Find("Player");
+        context.player = player;
+        desicionTree.Evaluate(this, context);
     }
-
-    private void Update()
+    public void Pursuit()
     {
+        Vector3 direction = player.transform.position - transform.position;
+        direction.y = 0;
+        Vector3 moveDirection = direction.normalized;
 
-        bool seenPlayer;
+        transform.position += moveDirection * speed * Time.deltaTime;
 
-        if (fsm._currentState is AttackState)
-        {
-            seenPlayer = los.IsRangeAttack(transform, player.transform);
-        }
-        else
-        {
-            seenPlayer = los.IsRange(transform, player.transform) == true &&
-                los.IsAngle(transform, player.transform) == true &&
-                los.IsObstacle(transform, player.transform) == true;
-        }
-
-        fsm.UpdateState(seenPlayer);
-
-        ExecuteState();
+        transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
     }
 
-    public void ExecuteState()
+    public void Patrol()
     {
-        if (fsm._currentState is PatrolState)
-        {
-            model.Patrol();
-        }
-        else if (fsm._currentState is PursuitState)
-        {
-            model.Pursuit();
-        }
-        else if (fsm._currentState is AttackState)
-        {
-            model.StartAttack();
-        }
+        transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
     }
+
+
 }
+

@@ -69,6 +69,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float rotationSpeed=3;
     [SerializeField] private float patrolRotationSpeed = 3;
 
+    [SerializeField] private Material attackMaterial;
+    private Material defaultMaterial;
+    private MeshRenderer renderer;
 
     private void Awake()
     {
@@ -96,6 +99,14 @@ public class EnemyController : MonoBehaviour
     public void Patrol()
     {
         transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Empieza a atacar");
+        renderer.material = attackMaterial;
+        Debug.Log("Deja de atacar");
+        renderer.material = defaultMaterial;
     }
 
 

@@ -5,20 +5,32 @@ using UnityEngine.Rendering;
 public class EnemyDecisionTree : MonoBehaviour
 {
     private DecisionNode rootNode;
+    private DecisionNode questionAttackNode;
 
     private void Awake()
     {
         ActionNode patrolNode = new ActionNode(enemy => enemy.Patrol());//llamar funcion sin un nombre,arrow function
         ActionNode pursuitNode = new ActionNode(enemy => enemy.Pursuit());
+        ActionNode attackNode = new ActionNode(enemy => enemy.Attack());
+
+
+        questionAttackNode = new QuestionNode(context => context.los.IsRangeAttack(context.self, context.player),
+        pursuitNode, attackNode);
 
         rootNode = new QuestionNode(context => context.los.IsRange(context.self, context.player)
         && context.los.IsAngle(context.self, context.player) &&
         context.los.IsObstacle(context.self, context.player),
-        pursuitNode, patrolNode);
+        questionAttackNode, patrolNode);
+
     }
 
-        public void Evaluate(EnemyController enemy, EnemyContext context)
-        {
-            rootNode.Evaluate(enemy, context);
-        }
+    public void Evaluate(EnemyController enemy, EnemyContext context)
+    {
+        rootNode.Evaluate(enemy, context);
+    }
+
+    public void Evaluatee(EnemyController enemy, EnemyContext context)
+    {
+        questionAttackNode.Evaluate(enemy, context);
+    }
 }

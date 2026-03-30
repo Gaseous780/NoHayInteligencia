@@ -21,7 +21,7 @@ public class QuestionNode : DecisionNode
 
     public override void Evaluate(EnemyController enemy, EnemyContext context)
     {
-        if(question (context))
+        if (question(context))
         {
             trueNode.Evaluate(enemy, context);
         }
@@ -32,11 +32,11 @@ public class QuestionNode : DecisionNode
     }
 }
 
-public class ActionNode: DecisionNode
+public class ActionNode : DecisionNode
 {
-    private Action <EnemyController>action;
+    private Action<EnemyController> action;
 
-    public ActionNode(Action <EnemyController>action)
+    public ActionNode(Action<EnemyController> action)
     {
         this.action = action;
     }

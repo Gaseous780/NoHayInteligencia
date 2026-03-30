@@ -31,7 +31,7 @@ public class EnemyControllerSB : MonoBehaviour
         Vector3 dir = Vector3.zero;
         switch (mode)
         {
-            case Mode.Seek:
+            case Mode.Seek://persue
                 dir = SteeringBehaviours.Seek(transform, player.position);
                 break;
             case Mode.Flee:
@@ -46,7 +46,7 @@ public class EnemyControllerSB : MonoBehaviour
             case Mode.Evade:
                 dir = SteeringBehaviours.Evade(transform, player, playerRB,0.5f);
                 break;
-                case Mode.Wander:
+                case Mode.Wander://patrullaje
                 wanderTime-=Time.deltaTime;
                 if(wanderTime<=0f)
                 {

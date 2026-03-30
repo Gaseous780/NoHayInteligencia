@@ -9,10 +9,10 @@ public static class SteeringBehaviours
         return dir.normalized;
     }
     public static Vector3 Flee(Transform self, Vector3 Target)
-    { 
-    Vector3 dir= self.position - Target;
-    dir.y = 0;
-    return dir.normalized;
+    {
+        Vector3 dir = self.position - Target;
+        dir.y = 0;
+        return dir.normalized;
     }
 
     public static Vector3 Arrive(Transform self, Vector3 Target, float slowRadius)
@@ -28,9 +28,43 @@ public static class SteeringBehaviours
         return dir.normalized * speedFactor;
     }
 
-    public static Vector3 Persue(Transform self,Transform target,Rigidbody targetRB,float time)
+    public static Vector3 Pursue(Transform self, Transform target, Rigidbody targetRB, float maxPredictionTime)
     {
-        Vector3 futurePos = target.position + targetRB.linearVelocity * time;
+        //Vector3 targetVelocity = Vector3.zero;
+        //targetVelocity = targetRB.linearVelocity;
+
+        //Vector3 toTarget = target.position - self.position;
+        //toTarget.y = 0;
+
+        //float distance = toTarget.magnitude;
+        //float predictionTime = Mathf.Clamp(distance / 5f, 0f, maxPredictionTime);
+
+        //Vector3 futurePos = target.position + targetVelocity * predictionTime;
+        Vector3 futurePos = CalculateFuturePos(self, target, targetRB, maxPredictionTime);
         return Seek(self, futurePos);
+
+    }
+
+    public static Vector3 CalculateFuturePos(Transform self, Transform target,Rigidbody targetRB, float maxPredictionTime)
+
+    {
+        Vector3 targetVelocity=Vector3.zero;
+        targetVelocity = targetRB.linearVelocity;
+        Vector3 toTarget=target.position-self.position;
+        toTarget.y = 0;
+        float distance = toTarget.magnitude;
+        float predictionTime=Mathf.Clamp(distance / 5f,0f, maxPredictionTime);
+        Vector3 futurePos= target.position+targetVelocity*predictionTime;
+        return target.position+targetVelocity*predictionTime;
+    }
+
+    public static Vector3 Evade(Transform self,Transform target,Rigidbody targetRB, float maxPredictionTime)
+    {
+        Vector3 futurePos= CalculateFuturePos(self, target,targetRB, maxPredictionTime);
+        return Seek(self, futurePos);
+    }
+    public static Vector3 Wander()
+    {
+        
     }
 }

@@ -7,7 +7,9 @@ public class EnemyControllerSB : MonoBehaviour
         Seek,
         Flee,
         Arrive,
-        Persue
+        Persue,
+        Evade,
+        Wander
     }
     [SerializeField] private Mode mode;
     [SerializeField] private Transform player;
@@ -34,8 +36,14 @@ public class EnemyControllerSB : MonoBehaviour
                 dir = SteeringBehaviours.Arrive(transform, player.position, 5f);
                 break;
             case Mode.Persue:
-                dir = SteeringBehaviours.Persue(transform, player,playerRB, 2f);
+                dir = SteeringBehaviours.Pursue(transform, player,playerRB, 5f);
                 break ;
+            case Mode.Evade:
+                dir = SteeringBehaviours.Evade(transform, player, playerRB,0.5f);
+                break;
+                case Mode.Wander:
+                dir = SteeringBehaviours.Wander();
+                break;
         }
         Move(dir);
 

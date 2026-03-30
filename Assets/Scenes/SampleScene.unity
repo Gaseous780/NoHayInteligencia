@@ -856,6 +856,7 @@ GameObject:
   - component: {fileID: 1969680491}
   - component: {fileID: 1969680493}
   - component: {fileID: 1969680495}
+  - component: {fileID: 1969680496}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1061,6 +1062,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d776479fe319246ad4d469d821c63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1969680496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969680484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4fbf632867d74e49a3a68c3a2f64526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyControllerSB
+  mode: 0
+  player: {fileID: 1756837726}
+  speed: 3
+  rotationSpeed: 5
 --- !u!1 &2061984196
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,11 +14,11 @@ public class EnemyDecisionTree : MonoBehaviour
         //ActionNode pursuitNode = new ActionNode(enemy => enemy.Pursuit());
         ActionNode attackNode = new ActionNode(enemy => enemy.Attack());
 
-        WeightedRandomActionNode seePlayerNode = new WeightedRandomActionNode (float, System.Action<EnemyController>)[]
-        {
-            (70f,enemy=>enemy.Pursuit()),
-            (20f,enemy=>enemy.Patrol())
-        }
+        //WeightedRandomActionNode seePlayerNode = new WeightedRandomActionNode (float, System.Action<EnemyController>[]
+        //{
+        //    (70f,enemy=>enemy.Pursuit()),
+        //    (20f, enemy => enemy.Patrol());
+        //}
         //questionAttackNode = new QuestionNode(context => context.los.IsRangeAttack(context.self, context.player),
         //attackNode, pursuitNode);
 

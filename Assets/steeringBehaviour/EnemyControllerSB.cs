@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyControllerSB : MonoBehaviour
@@ -16,10 +17,14 @@ public class EnemyControllerSB : MonoBehaviour
     private Rigidbody playerRB;
     [SerializeField] float speed = 3f;
     [SerializeField] float rotationSpeed = 5f;
+    private Vector3 wanderDirection;
+    private float wanderTime;
+    [SerializeField] private float WanderchangeInterval = 1.5f;
 
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody>();
+        wanderDirection=transform.forward;
     }
     private void Update()
     {
@@ -42,7 +47,13 @@ public class EnemyControllerSB : MonoBehaviour
                 dir = SteeringBehaviours.Evade(transform, player, playerRB,0.5f);
                 break;
                 case Mode.Wander:
-                dir = SteeringBehaviours.Wander();
+                wanderTime-=Time.deltaTime;
+                if(wanderTime<=0f)
+                {
+                    wanderDirection = SteeringBehaviours.Wander(wanderDirection, 180f);
+                    wanderTime = WanderchangeInterval;
+                }
+                dir = wanderDirection;
                 break;
         }
         Move(dir);

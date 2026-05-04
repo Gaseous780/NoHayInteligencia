@@ -49,11 +49,18 @@ public class StatePathFinding : MonoBehaviour
 
     public List <Node> GetConections(Node node) 
     {
-        return node._neighbors;
+        return node.neightbourds;
     }
 
     public float GetCosts (Node node1, Node node2)
     {
-        return Vector3.Distance(node1.transform.position, node2.transform.position);
+        float costs = 0.0f;
+        costs += Vector3.Distance(node1.transform.position, node2.transform.position);
+        if (node2.hasTrap)
+        {
+            costs += 100;
+        }
+
+        return costs;
     }
 }

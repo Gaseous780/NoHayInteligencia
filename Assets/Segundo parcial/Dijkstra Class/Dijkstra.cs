@@ -17,7 +17,7 @@ public class Dijkstra : MonoBehaviour
 
         int counter = 0;
 
-        while (pending.IsEmpty)
+        while (!pending.IsEmpty)
         {
             counter++;
             if (counter > watchDog) break;

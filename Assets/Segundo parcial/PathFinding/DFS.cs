@@ -20,7 +20,9 @@ public class DFS
             if (isSatified(node) == true) //Se encuentra el nodo que cumple el reqisito pedido
             {
                 List<Node> path = new List<Node>();
+                path.Add(node);
                 Node current = node;
+
                 while (parents.ContainsKey(current) == true) //Mientras que encuentre el valor del pedido
                 {
                     path.Add(current);

@@ -36,6 +36,22 @@ public class StatePathFinding : MonoBehaviour
 
         //Aca iría un metodo del profe que hace que se ponga Crash en la posición inicial
     }
+    public void SetPatASar()
+    {
+        List<Node> path = AStar.Run(start, IsSatisfied, GetConections, GetCosts,Heuristic);
+        List<Vector3> points = new List<Vector3>();
+
+        // A partir de aca implementación del profe
+
+        for (int i = 0; i < points.Count; i++)
+        {
+            points.Add(path[i].transform.position);
+        }
+        _move.SetPosition(StartCoroutine().transform.position);
+        SetWayPoints(points);
+
+        //Aca iría un metodo del profe que hace que se ponga Crash en la posición inicial
+    }
 
     public bool IsSatisfied (Node node)
     {
@@ -50,6 +66,12 @@ public class StatePathFinding : MonoBehaviour
     public List <Node> GetConections(Node node) 
     {
         return node.neightbourds;
+    }
+    public float Heuristic(Node node)
+    {
+        float h = 0;
+        h += Vector3.Distance(node.transform.position, goal.transform.position);
+        return h;
     }
 
     public float GetCosts (Node node1, Node node2)

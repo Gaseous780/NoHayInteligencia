@@ -5,6 +5,8 @@ public class StatePathFinding : MonoBehaviour
 {
     [SerializeField] private Node goal;
     [SerializeField] private Node end;
+    [SerializeField] private float radius;
+    public LayerMask nodeLayer; 
 
     public void SetPath()
     {
@@ -36,8 +38,34 @@ public class StatePathFinding : MonoBehaviour
 
         //Aca iría un metodo del profe que hace que se ponga Crash en la posición inicial
     }
+
+    Node GetClosestNode(Vector3 position)
+    {
+        Node closest = null;
+
+        Collider[] nodos = Physics.OverlapSphere(position, radius, nodeLayer);
+
+        float nearDistnce = Mathf.Infinity;
+
+
+        for(int i = 0;i < nodos.Length;i++)
+        {
+            Node newNode = nodos[i].gameObject.GetComponent<Node>();
+            if (newNode != null) { continue; }
+            float distance = Vector3.Distance(position, nodos[i].transform.position);
+            if (distance < nearDistnce)
+            {
+                nearDistnce = Vector3.Distance(position, nodos[i].transform.position);
+                closest = newNode;
+            }
+            
+        }
+        return closest;
+    }
+
     public void SetPatASar()
     {
+        //Node inicio=GetClosestNode(_entity)
         List<Node> path = AStar.Run(start, IsSatisfied, GetConections, GetCosts,Heuristic);
         List<Vector3> points = new List<Vector3>();
 

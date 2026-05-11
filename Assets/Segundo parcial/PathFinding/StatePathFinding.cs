@@ -55,6 +55,8 @@ public class StatePathFinding : MonoBehaviour
             float distance = Vector3.Distance(position, nodos[i].transform.position);
             if (distance < nearDistnce)
             {
+                Vector3 direction = nodos[i].transform.position-position;
+                if (Physics.Raycast(position, direction.normalized,distance,LayerMask.GetMask("Wall")))continue;
                 nearDistnce = Vector3.Distance(position, nodos[i].transform.position);
                 closest = newNode;
             }

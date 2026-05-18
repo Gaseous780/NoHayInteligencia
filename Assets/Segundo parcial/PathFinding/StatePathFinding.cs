@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class StatePathFinding : MonoBehaviour
@@ -22,6 +23,24 @@ public class StatePathFinding : MonoBehaviour
         }
 
         //Aca iría un metodo del profe que hace que se ponga Crash en la posición inicial
+    }
+    public void ThetaStar()
+    {
+        Node inicio = GetClosestNode(_entity.transform.position);
+        List<Node>path=ThetaStar.Run(inicio,IsSatisfied, GetConections,GetCosts,Heuristic,);
+        List<Vector3> points = new List<Vector3>();
+        for(int i=0; i < path.Count; i++)
+        {
+            points.Add(path[i].transform.position);
+        }
+        SetWaypoints(points);
+    }
+    public bool HasLineOfSight(Node node1,Node node2)
+    {
+        Vector3 startPos = node1.transform.position + Vector3.up*0.5F;
+        Vector3 dirction = endpos - startPos;
+        float distance = direction.magnitude;
+        return!Physics.Raycast(startPos, dirction.normalized,distance);
     }
 
     public void SetPatDijkstrah()
